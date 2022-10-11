@@ -113,18 +113,34 @@
       const yearsLivedSort = inventors.sort(function (a, b) {
         const lastGuy = a.passed - a.year;
         const nextGuy = b.passed - b.year;
-        return lastGuy > nextGuy ? 1 : -1;
+        return lastGuy > nextGuy ? -1 : 1;
       });
 
       console.log("sorted by years lived", yearsLivedSort);
 
       // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
       // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-      url = "https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris";
-      const elements = document.getElementById("intro");
+      // url = "https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris";
+      // const category = document.querySelector(".mw-category");
+      // // look inside a DOM element
+      // console.log(category);
+      // const links = [...category.querySelectorAll("a")]; // this will spread and iterable into an array
+
+      // const de = links
+      //   .map((link) => link.textContent) // gets the title of the content.
+      //   .filter((streetName) => streetName.includes("de")); // filters only what contains "de"
+      // console.log(de);
 
       // 7. sort Exercise
       // Sort the people alphabetically by last name
+      console.log("ex 7 sort by last name");
+      const alpha = people.sort(function (lastOne, nextOne) {
+        const [aLast, aFirst] = lastOne.split(", "); //deconstruct
+        const [bLast, bFirst] = nextOne.split(", "); //deconstruct
+        return aLast > bLast ? 1 : -1;
+      });
+
+      console.log(alpha);
 
       // 8. Reduce Exercise
       // Sum up the instances of each of these
@@ -144,6 +160,16 @@
         "car",
         "truck",
       ];
+
+      // this is a frequency vector
+      const transportation = data.reduce(function (obj, item) {
+        if (!obj[item]) {
+          obj[item] = 0;
+        }
+        obj[item]++;
+        return obj;
+      }, {}); // starting with a blank object, then you populate it
+      console.log(transportation);
     </script>
   </body>
 </html>
